@@ -2,91 +2,1325 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>VSCode Keyboard Shortcuts Cheat Sheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE ULTIMATE VSCode Keyboard Shortcuts Cheat Sheet</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
         h1 {
             text-align: center;
-            color: #569cd6;
+            color: #58a6ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
         }
-        .section {
+
+        .subtitle {
+            text-align: center;
+            color: #8b949e;
+            font-size: 1.2em;
             margin-bottom: 30px;
         }
-        .section-title {
-            color: #c586c0;
-            border-bottom: 2px solid #3c3c3c;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            font-size: 1.4em;
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 30px;
         }
+
+        #searchInput {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 16px;
+            padding: 12px 16px;
+            width: 100%;
+            max-width: 500px;
+            outline: none;
+        }
+
+        #searchInput:focus {
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+        }
+
+        .platform-toggle {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .platform-btn {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+            padding: 8px 16px;
+            transition: all 0.2s;
+        }
+
+        .platform-btn.active {
+            background-color: #238636;
+            border-color: #238636;
+        }
+
+        .platform-btn:hover {
+            background-color: #30363d;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .section {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: #f79000;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #21262d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title:hover {
+            color: #ffab40;
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .section.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section.collapsed .shortcuts {
+            display: none;
+        }
+
+        .shortcuts {
+            transition: all 0.3s ease;
+        }
+
         .shortcut {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
-            border-bottom: 1px solid #333;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #21262d;
+            transition: background-color 0.2s;
         }
+
+        .shortcut:hover {
+            background-color: #21262d;
+            margin: 0 -10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 4px;
+        }
+
+        .shortcut:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-desc {
+            flex: 1;
+            margin-right: 20px;
+        }
+
         .keys {
-            font-family: Consolas, monospace;
-            color: #9cdcfe;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            color: #58a6ff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            white-space: nowrap;
+        }
+
+        .pro-tip {
+            background-color: #0d419d;
+            border-left: 4px solid #58a6ff;
+            border-radius: 0 4px 4px 0;
+            color: #e6edf3;
+            margin: 10px 0;
+            padding: 12px 16px;
+        }
+
+        .pro-tip-title {
+            color: #58a6ff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .highlight {
+            background-color: #ffd33d22;
+            border-radius: 3px;
+            padding: 2px 4px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .shortcut {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .shortcut-desc {
+                margin-right: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>VSCode Keyboard Shortcuts Cheat Sheet</h1>
+    <div class="container">
+        <h1>🚀 THE ULTIMATE VSCode Cheat Sheet</h1>
+        <div class="subtitle">Master every keyboard shortcut, tip, and trick to become a VS Code ninja!</div>
 
-    <div class="section">
-        <div class="section-title">General</div>
-        <div class="shortcut"><span>Command Palette</span><span class="keys">Ctrl + Shift + P</span></div>
-        <div class="shortcut"><span>Quick Open</span><span class="keys">Ctrl + P</span></div>
-	<div class="shortcut"><span>Quick Open Symbols</span><span class="keys">Ctrl + P + @</span></div>
-        <div class="shortcut"><span>Toggle Sidebar</span><span class="keys">Ctrl + B</span></div>
-        <div class="shortcut"><span>Open Terminal</span><span class="keys">Ctrl + J</span></div>
-        <div class="shortcut"><span>Settings</span><span class="keys">Ctrl + ,</span></div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Search shortcuts... (e.g., 'format', 'debug', 'git')" />
+        </div>
+
+        <div class="platform-toggle">
+            <button class="platform-btn active" data-platform="win">Windows/Linux</button>
+            <button class="platform-btn" data-platform="mac">macOS</button>
+        </div>
+
+        <div class="grid">
+            <!-- Essential & General -->
+            <div class="section" data-category="general">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🎯 Essential & General
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Command Palette (Most Important!)</span>
+                        <span class="keys" data-win="Ctrl + Shift + P" data-mac="Cmd + Shift + P">Ctrl + Shift + P</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Quick Open Files</span>
+                        <span class="keys" data-win="Ctrl + P" data-mac="Cmd + P">Ctrl + P</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Quick Open Symbols in File</span>
+                        <span class="keys" data-win="Ctrl + Shift + O" data-mac="Cmd + Shift + O">Ctrl + Shift + O</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Quick Open Symbols in Workspace</span>
+                        <span class="keys" data-win="Ctrl + T" data-mac="Cmd + T">Ctrl + T</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Settings</span>
+                        <span class="keys" data-win="Ctrl + ," data-mac="Cmd + ,">Ctrl + ,</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Keyboard Shortcuts</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + S" data-mac="Cmd + K Cmd + S">Ctrl + K Ctrl + S</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">User Snippets</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → snippets" data-mac="Cmd + Shift + P → snippets">Ctrl + Shift + P → snippets</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        The Command Palette (Ctrl+Shift+P) is your gateway to everything! Type partial commands like "format", "git", "debug" to discover features.
+                    </div>
+                </div>
+            </div>
+
+            <!-- File & Workspace Management -->
+            <div class="section" data-category="files">
+                <div class="section-title" onclick="toggleSection(this)">
+                    📁 File & Workspace Management
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">New File</span>
+                        <span class="keys" data-win="Ctrl + N" data-mac="Cmd + N">Ctrl + N</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">New Window</span>
+                        <span class="keys" data-win="Ctrl + Shift + N" data-mac="Cmd + Shift + N">Ctrl + Shift + N</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Open File</span>
+                        <span class="keys" data-win="Ctrl + O" data-mac="Cmd + O">Ctrl + O</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Open Folder</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + O" data-mac="Cmd + K Cmd + O">Ctrl + K Ctrl + O</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Save File</span>
+                        <span class="keys" data-win="Ctrl + S" data-mac="Cmd + S">Ctrl + S</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Save As</span>
+                        <span class="keys" data-win="Ctrl + Shift + S" data-mac="Cmd + Shift + S">Ctrl + Shift + S</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Save All</span>
+                        <span class="keys" data-win="Ctrl + K S" data-mac="Cmd + Alt + S">Ctrl + K S</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Close File</span>
+                        <span class="keys" data-win="Ctrl + W" data-mac="Cmd + W">Ctrl + W</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Close All Files</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + W" data-mac="Cmd + K Cmd + W">Ctrl + K Ctrl + W</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Reopen Closed File</span>
+                        <span class="keys" data-win="Ctrl + Shift + T" data-mac="Cmd + Shift + T">Ctrl + Shift + T</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Recent Files</span>
+                        <span class="keys" data-win="Ctrl + R" data-mac="Cmd + R">Ctrl + R</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Copy File Path</span>
+                        <span class="keys" data-win="Ctrl + K P" data-mac="Cmd + K P">Ctrl + K P</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Reveal in Explorer</span>
+                        <span class="keys" data-win="Ctrl + K R" data-mac="Cmd + K R">Ctrl + K R</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use Ctrl+P then type ">" to access Command Palette, or "@" for symbols, or ":" for line numbers!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation & Movement -->
+            <div class="section" data-category="navigation">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🧭 Navigation & Movement
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Line</span>
+                        <span class="keys" data-win="Ctrl + G" data-mac="Cmd + G">Ctrl + G</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Definition</span>
+                        <span class="keys" data-win="F12" data-mac="F12">F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Peek Definition</span>
+                        <span class="keys" data-win="Alt + F12" data-mac="Alt + F12">Alt + F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Declaration</span>
+                        <span class="keys" data-win="Ctrl + F12" data-mac="Cmd + F12">Ctrl + F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Type Definition</span>
+                        <span class="keys" data-win="Ctrl + Shift + F12" data-mac="Cmd + Shift + F12">Ctrl + Shift + F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Implementation</span>
+                        <span class="keys" data-win="Ctrl + F12" data-mac="Cmd + F12">Ctrl + F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to References</span>
+                        <span class="keys" data-win="Shift + F12" data-mac="Shift + F12">Shift + F12</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go Back</span>
+                        <span class="keys" data-win="Alt + ←" data-mac="Ctrl + -">Alt + ←</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go Forward</span>
+                        <span class="keys" data-win="Alt + →" data-mac="Ctrl + Shift + -">Alt + →</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to Next Tab</span>
+                        <span class="keys" data-win="Ctrl + Tab" data-mac="Cmd + Alt + →">Ctrl + Tab</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to Previous Tab</span>
+                        <span class="keys" data-win="Ctrl + Shift + Tab" data-mac="Cmd + Alt + ←">Ctrl + Shift + Tab</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Jump to Matching Bracket</span>
+                        <span class="keys" data-win="Ctrl + Shift + \\" data-mac="Cmd + Shift + \\">Ctrl + Shift + \\</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to Beginning of File</span>
+                        <span class="keys" data-win="Ctrl + Home" data-mac="Cmd + ↑">Ctrl + Home</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to End of File</span>
+                        <span class="keys" data-win="Ctrl + End" data-mac="Cmd + ↓">Ctrl + End</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to Beginning of Line</span>
+                        <span class="keys" data-win="Home" data-mac="Cmd + ←">Home</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate to End of Line</span>
+                        <span class="keys" data-win="End" data-mac="Cmd + →">End</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Navigate by Word</span>
+                        <span class="keys" data-win="Ctrl + ← / →" data-mac="Alt + ← / →">Ctrl + ← / →</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Hold Shift while navigating to select text. Use Ctrl+D to select word under cursor, then Ctrl+D again to select next occurrence!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Editing & Manipulation -->
+            <div class="section" data-category="editing">
+                <div class="section-title" onclick="toggleSection(this)">
+                    ✏️ Text Editing & Manipulation
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Cut Line</span>
+                        <span class="keys" data-win="Ctrl + X" data-mac="Cmd + X">Ctrl + X</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Copy Line</span>
+                        <span class="keys" data-win="Ctrl + C" data-mac="Cmd + C">Ctrl + C</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Paste</span>
+                        <span class="keys" data-win="Ctrl + V" data-mac="Cmd + V">Ctrl + V</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Duplicate Line</span>
+                        <span class="keys" data-win="Shift + Alt + ↓" data-mac="Shift + Alt + ↓">Shift + Alt + ↓</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Move Line Up</span>
+                        <span class="keys" data-win="Alt + ↑" data-mac="Alt + ↑">Alt + ↑</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Move Line Down</span>
+                        <span class="keys" data-win="Alt + ↓" data-mac="Alt + ↓">Alt + ↓</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Delete Line</span>
+                        <span class="keys" data-win="Ctrl + Shift + K" data-mac="Cmd + Shift + K">Ctrl + Shift + K</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Insert Line Below</span>
+                        <span class="keys" data-win="Ctrl + Enter" data-mac="Cmd + Enter">Ctrl + Enter</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Insert Line Above</span>
+                        <span class="keys" data-win="Ctrl + Shift + Enter" data-mac="Cmd + Shift + Enter">Ctrl + Shift + Enter</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Join Lines</span>
+                        <span class="keys" data-win="Ctrl + J" data-mac="Ctrl + J">Ctrl + J</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Transform to Uppercase</span>
+                        <span class="keys" data-win="Ctrl + Shift + U" data-mac="Cmd + Shift + U">Ctrl + Shift + U</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Transform to Lowercase</span>
+                        <span class="keys" data-win="Ctrl + Shift + L" data-mac="Cmd + Shift + L">Ctrl + Shift + L</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Indent Line</span>
+                        <span class="keys" data-win="Ctrl + ]" data-mac="Cmd + ]">Ctrl + ]</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Outdent Line</span>
+                        <span class="keys" data-win="Ctrl + [" data-mac="Cmd + [">Ctrl + [</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Line Comment</span>
+                        <span class="keys" data-win="Ctrl + /" data-mac="Cmd + /">Ctrl + /</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Block Comment</span>
+                        <span class="keys" data-win="Shift + Alt + A" data-mac="Shift + Alt + A">Shift + Alt + A</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Format Document</span>
+                        <span class="keys" data-win="Shift + Alt + F" data-mac="Shift + Alt + F">Shift + Alt + F</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Format Selection</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + F" data-mac="Cmd + K Cmd + F">Ctrl + K Ctrl + F</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Select text and use Ctrl+Shift+P → "Transform" to access case transformations, sort lines, and more text manipulation commands!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Cursor & Selection -->
+            <div class="section" data-category="selection">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🎯 Multi-Cursor & Selection
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Add Cursor Above</span>
+                        <span class="keys" data-win="Ctrl + Alt + ↑" data-mac="Cmd + Alt + ↑">Ctrl + Alt + ↑</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Add Cursor Below</span>
+                        <span class="keys" data-win="Ctrl + Alt + ↓" data-mac="Cmd + Alt + ↓">Ctrl + Alt + ↓</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Add Cursor to Line Ends</span>
+                        <span class="keys" data-win="Shift + Alt + I" data-mac="Shift + Alt + I">Shift + Alt + I</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Select Current Word</span>
+                        <span class="keys" data-win="Ctrl + D" data-mac="Cmd + D">Ctrl + D</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Select All Occurrences</span>
+                        <span class="keys" data-win="Ctrl + Shift + L" data-mac="Cmd + Shift + L">Ctrl + Shift + L</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Select All Occurrences of Word</span>
+                        <span class="keys" data-win="Ctrl + F2" data-mac="Cmd + F2">Ctrl + F2</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Expand Selection</span>
+                        <span class="keys" data-win="Shift + Alt + →" data-mac="Shift + Alt + →">Shift + Alt + →</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Shrink Selection</span>
+                        <span class="keys" data-win="Shift + Alt + ←" data-mac="Shift + Alt + ←">Shift + Alt + ←</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Select Line</span>
+                        <span class="keys" data-win="Ctrl + L" data-mac="Cmd + L">Ctrl + L</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Select All</span>
+                        <span class="keys" data-win="Ctrl + A" data-mac="Cmd + A">Ctrl + A</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Column (Box) Selection</span>
+                        <span class="keys" data-win="Shift + Alt + Drag" data-mac="Shift + Alt + Drag">Shift + Alt + Drag</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use Ctrl+D to select word, then keep pressing Ctrl+D to select more occurrences. Use Ctrl+K Ctrl+D to skip current and select next!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Replace -->
+            <div class="section" data-category="search">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🔍 Search & Replace
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Find</span>
+                        <span class="keys" data-win="Ctrl + F" data-mac="Cmd + F">Ctrl + F</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Replace</span>
+                        <span class="keys" data-win="Ctrl + H" data-mac="Cmd + Alt + F">Ctrl + H</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Find in Files</span>
+                        <span class="keys" data-win="Ctrl + Shift + F" data-mac="Cmd + Shift + F">Ctrl + Shift + F</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Replace in Files</span>
+                        <span class="keys" data-win="Ctrl + Shift + H" data-mac="Cmd + Shift + H">Ctrl + Shift + H</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Find Next</span>
+                        <span class="keys" data-win="F3" data-mac="Cmd + G">F3</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Find Previous</span>
+                        <span class="keys" data-win="Shift + F3" data-mac="Cmd + Shift + G">Shift + F3</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Case Sensitive</span>
+                        <span class="keys" data-win="Alt + C" data-mac="Alt + C">Alt + C</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Regex</span>
+                        <span class="keys" data-win="Alt + R" data-mac="Alt + R">Alt + R</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Whole Word</span>
+                        <span class="keys" data-win="Alt + W" data-mac="Alt + W">Alt + W</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use regex in search! Try \d+ for numbers, \w+ for words, or (group1|group2) for alternatives. Enable with Alt+R!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Window & Panel Management -->
+            <div class="section" data-category="windows">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🪟 Window & Panel Management
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Sidebar</span>
+                        <span class="keys" data-win="Ctrl + B" data-mac="Cmd + B">Ctrl + B</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Panel (Terminal/Problems)</span>
+                        <span class="keys" data-win="Ctrl + J" data-mac="Cmd + J">Ctrl + J</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Explorer</span>
+                        <span class="keys" data-win="Ctrl + Shift + E" data-mac="Cmd + Shift + E">Ctrl + Shift + E</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Search</span>
+                        <span class="keys" data-win="Ctrl + Shift + F" data-mac="Cmd + Shift + F">Ctrl + Shift + F</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Source Control</span>
+                        <span class="keys" data-win="Ctrl + Shift + G" data-mac="Ctrl + Shift + G">Ctrl + Shift + G</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Debug</span>
+                        <span class="keys" data-win="Ctrl + Shift + D" data-mac="Cmd + Shift + D">Ctrl + Shift + D</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Extensions</span>
+                        <span class="keys" data-win="Ctrl + Shift + X" data-mac="Cmd + Shift + X">Ctrl + Shift + X</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Split Editor Right</span>
+                        <span class="keys" data-win="Ctrl + \\" data-mac="Cmd + \\">Ctrl + \\</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Split Editor Down</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + \\" data-mac="Cmd + K Cmd + \\">Ctrl + K Ctrl + \\</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Focus Next Editor Group</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + →" data-mac="Cmd + K Cmd + →">Ctrl + K Ctrl + →</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Focus Previous Editor Group</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + ←" data-mac="Cmd + K Cmd + ←">Ctrl + K Ctrl + ←</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Move Editor to Next Group</span>
+                        <span class="keys" data-win="Ctrl + Alt + →" data-mac="Cmd + Alt + →">Ctrl + Alt + →</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Close Editor Group</span>
+                        <span class="keys" data-win="Ctrl + K W" data-mac="Cmd + K W">Ctrl + K W</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Zen Mode</span>
+                        <span class="keys" data-win="Ctrl + K Z" data-mac="Cmd + K Z">Ctrl + K Z</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Full Screen</span>
+                        <span class="keys" data-win="F11" data-mac="Ctrl + Cmd + F">F11</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use Zen Mode (Ctrl+K Z) for distraction-free coding. Press Escape twice to exit. Try Ctrl+K Ctrl+T to change themes quickly!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Management -->
+            <div class="section" data-category="terminal">
+                <div class="section-title" onclick="toggleSection(this)">
+                    💻 Terminal Management
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Terminal</span>
+                        <span class="keys" data-win="Ctrl + `" data-mac="Cmd + `">Ctrl + `</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">New Terminal</span>
+                        <span class="keys" data-win="Ctrl + Shift + `" data-mac="Cmd + Shift + `">Ctrl + Shift + `</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Split Terminal</span>
+                        <span class="keys" data-win="Ctrl + Shift + 5" data-mac="Cmd + Shift + 5">Ctrl + Shift + 5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Focus Next Terminal</span>
+                        <span class="keys" data-win="Ctrl + PageDown" data-mac="Cmd + Shift + ]">Ctrl + PageDown</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Focus Previous Terminal</span>
+                        <span class="keys" data-win="Ctrl + PageUp" data-mac="Cmd + Shift + [">Ctrl + PageUp</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Kill Terminal</span>
+                        <span class="keys" data-win="Ctrl + Shift + K" data-mac="Cmd + Shift + K">Ctrl + Shift + K</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Scroll Up</span>
+                        <span class="keys" data-win="Ctrl + ↑" data-mac="Cmd + ↑">Ctrl + ↑</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Scroll Down</span>
+                        <span class="keys" data-win="Ctrl + ↓" data-mac="Cmd + ↓">Ctrl + ↓</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Scroll to Top</span>
+                        <span class="keys" data-win="Ctrl + Home" data-mac="Cmd + Home">Ctrl + Home</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Scroll to Bottom</span>
+                        <span class="keys" data-win="Ctrl + End" data-mac="Cmd + End">Ctrl + End</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Right-click in terminal for context menu. Use Ctrl+C to copy selected text, Ctrl+V to paste. Configure shell in settings!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Debugging -->
+            <div class="section" data-category="debug">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🐛 Debugging
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Start/Continue Debugging</span>
+                        <span class="keys" data-win="F5" data-mac="F5">F5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Start Without Debugging</span>
+                        <span class="keys" data-win="Ctrl + F5" data-mac="Ctrl + F5">Ctrl + F5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Stop Debugging</span>
+                        <span class="keys" data-win="Shift + F5" data-mac="Shift + F5">Shift + F5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Restart Debugging</span>
+                        <span class="keys" data-win="Ctrl + Shift + F5" data-mac="Ctrl + Shift + F5">Ctrl + Shift + F5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Breakpoint</span>
+                        <span class="keys" data-win="F9" data-mac="F9">F9</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Step Over</span>
+                        <span class="keys" data-win="F10" data-mac="F10">F10</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Step Into</span>
+                        <span class="keys" data-win="F11" data-mac="F11">F11</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Step Out</span>
+                        <span class="keys" data-win="Shift + F11" data-mac="Shift + F11">Shift + F11</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Conditional Breakpoint</span>
+                        <span class="keys" data-win="Shift + F9" data-mac="Shift + F9">Shift + F9</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Show Debug Console</span>
+                        <span class="keys" data-win="Ctrl + Shift + Y" data-mac="Cmd + Shift + Y">Ctrl + Shift + Y</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use conditional breakpoints! Right-click on breakpoint to add conditions like "x > 5" or hit counts. Use logpoints for console.log without code changes!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Git Integration -->
+            <div class="section" data-category="git">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🌿 Git Integration
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Source Control Panel</span>
+                        <span class="keys" data-win="Ctrl + Shift + G" data-mac="Ctrl + Shift + G">Ctrl + Shift + G</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Commit</span>
+                        <span class="keys" data-win="Ctrl + Enter" data-mac="Cmd + Enter">Ctrl + Enter</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Pull</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git pull" data-mac="Cmd + Shift + P → git pull">Ctrl + Shift + P → git pull</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Push</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git push" data-mac="Cmd + Shift + P → git push">Ctrl + Shift + P → git push</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Sync</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git sync" data-mac="Cmd + Shift + P → git sync">Ctrl + Shift + P → git sync</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Stage All Changes</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → stage all" data-mac="Cmd + Shift + P → stage all">Ctrl + Shift + P → stage all</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Unstage All Changes</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → unstage all" data-mac="Cmd + Shift + P → unstage all">Ctrl + Shift + P → unstage all</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Create Branch</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git branch" data-mac="Cmd + Shift + P → git branch">Ctrl + Shift + P → git branch</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: Checkout Branch</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git checkout" data-mac="Cmd + Shift + P → git checkout">Ctrl + Shift + P → git checkout</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Git: View File History</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → git log" data-mac="Cmd + Shift + P → git log">Ctrl + Shift + P → git log</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use GitLens extension for enhanced Git features! Click on line numbers to see blame info. Use Ctrl+Shift+P → "Git: " to see all Git commands!
+                    </div>
+                </div>
+            </div>
+
+            <!-- IntelliSense & Code Actions -->
+            <div class="section" data-category="intellisense">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🧠 IntelliSense & Code Actions
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Trigger IntelliSense</span>
+                        <span class="keys" data-win="Ctrl + Space" data-mac="Cmd + Space">Ctrl + Space</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Trigger Parameter Hints</span>
+                        <span class="keys" data-win="Ctrl + Shift + Space" data-mac="Cmd + Shift + Space">Ctrl + Shift + Space</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Quick Fix</span>
+                        <span class="keys" data-win="Ctrl + ." data-mac="Cmd + .">Ctrl + .</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Show Hover</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + I" data-mac="Cmd + K Cmd + I">Ctrl + K Ctrl + I</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Rename Symbol</span>
+                        <span class="keys" data-win="F2" data-mac="F2">F2</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Symbol in File</span>
+                        <span class="keys" data-win="Ctrl + Shift + O" data-mac="Cmd + Shift + O">Ctrl + Shift + O</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Go to Symbol in Workspace</span>
+                        <span class="keys" data-win="Ctrl + T" data-mac="Cmd + T">Ctrl + T</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Show Problems Panel</span>
+                        <span class="keys" data-win="Ctrl + Shift + M" data-mac="Cmd + Shift + M">Ctrl + Shift + M</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Next Error/Warning</span>
+                        <span class="keys" data-win="F8" data-mac="F8">F8</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Previous Error/Warning</span>
+                        <span class="keys" data-win="Shift + F8" data-mac="Shift + F8">Shift + F8</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Use Ctrl+. for quick fixes and refactoring suggestions. F2 renames all occurrences safely. Ctrl+Shift+O then type ":" to group symbols by category!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refactoring -->
+            <div class="section" data-category="refactor">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🔧 Refactoring
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Rename Symbol</span>
+                        <span class="keys" data-win="F2" data-mac="F2">F2</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Extract Method</span>
+                        <span class="keys" data-win="Ctrl + Shift + R" data-mac="Cmd + Shift + R">Ctrl + Shift + R</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Extract Variable</span>
+                        <span class="keys" data-win="Ctrl + Shift + R" data-mac="Cmd + Shift + R">Ctrl + Shift + R</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Organize Imports</span>
+                        <span class="keys" data-win="Shift + Alt + O" data-mac="Shift + Alt + O">Shift + Alt + O</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Sort Imports</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → sort imports" data-mac="Cmd + Shift + P → sort imports">Ctrl + Shift + P → sort imports</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Remove Unused Imports</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → remove unused" data-mac="Cmd + Shift + P → remove unused">Ctrl + Shift + P → remove unused</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Add Missing Imports</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → add missing" data-mac="Cmd + Shift + P → add missing">Ctrl + Shift + P → add missing</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Select code and use Ctrl+Shift+R for refactoring options. Many languages support extract method, variable, and more. Use Ctrl+. for quick fixes!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emmet -->
+            <div class="section" data-category="emmet">
+                <div class="section-title" onclick="toggleSection(this)">
+                    ⚡ Emmet (HTML/CSS)
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Expand Abbreviation</span>
+                        <span class="keys" data-win="Tab" data-mac="Tab">Tab</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Wrap with Abbreviation</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → wrap" data-mac="Cmd + Shift + P → wrap">Ctrl + Shift + P → wrap</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Remove Tag</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → remove tag" data-mac="Cmd + Shift + P → remove tag">Ctrl + Shift + P → remove tag</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Update Tag</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → update tag" data-mac="Cmd + Shift + P → update tag">Ctrl + Shift + P → update tag</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Balance Outward</span>
+                        <span class="keys" data-win="Ctrl + Shift + A" data-mac="Cmd + Shift + A">Ctrl + Shift + A</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Balance Inward</span>
+                        <span class="keys" data-win="Ctrl + Shift + D" data-mac="Cmd + Shift + D">Ctrl + Shift + D</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Try "div.container>ul.nav>li*5>a" then Tab! Use "lorem10" for placeholder text. "!" creates HTML5 boilerplate. CSS: "m10" → margin: 10px;
+                    </div>
+                </div>
+            </div>
+
+            <!-- Markdown -->
+            <div class="section" data-category="markdown">
+                <div class="section-title" onclick="toggleSection(this)">
+                    📝 Markdown
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Preview</span>
+                        <span class="keys" data-win="Ctrl + Shift + V" data-mac="Cmd + Shift + V">Ctrl + Shift + V</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Open Preview to Side</span>
+                        <span class="keys" data-win="Ctrl + K V" data-mac="Cmd + K V">Ctrl + K V</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Bold</span>
+                        <span class="keys" data-win="Ctrl + B" data-mac="Cmd + B">Ctrl + B</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Italic</span>
+                        <span class="keys" data-win="Ctrl + I" data-mac="Cmd + I">Ctrl + I</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Code Block</span>
+                        <span class="keys" data-win="Ctrl + Shift + `" data-mac="Cmd + Shift + `">Ctrl + Shift + `</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Strikethrough</span>
+                        <span class="keys" data-win="Alt + S" data-mac="Alt + S">Alt + S</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Install Markdown All in One extension for enhanced features! Use Ctrl+Shift+V for live preview. Type "table" snippet for quick tables!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language-Specific -->
+            <div class="section" data-category="language">
+                <div class="section-title" onclick="toggleSection(this)">
+                    🌐 Language-Specific
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">JavaScript: Add Import</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → add import" data-mac="Cmd + Shift + P → add import">Ctrl + Shift + P → add import</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Python: Run File</span>
+                        <span class="keys" data-win="Ctrl + F5" data-mac="Cmd + F5">Ctrl + F5</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Python: Run Selection</span>
+                        <span class="keys" data-win="Shift + Enter" data-mac="Shift + Enter">Shift + Enter</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">JSON: Format Document</span>
+                        <span class="keys" data-win="Shift + Alt + F" data-mac="Shift + Alt + F">Shift + Alt + F</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">CSS: Color Picker</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → color" data-mac="Cmd + Shift + P → color">Ctrl + Shift + P → color</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">HTML: Auto Rename Tag</span>
+                        <span class="keys" data-win="Auto (with extension)" data-mac="Auto (with extension)">Auto (with extension)</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💡 Pro Tip:</div>
+                        Install language-specific extensions! Python, JavaScript, C++, etc. Each adds unique shortcuts and features. Check extension docs for shortcuts!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Tips & Hidden Gems -->
+            <div class="section" data-category="protips">
+                <div class="section-title" onclick="toggleSection(this)">
+                    💎 Pro Tips & Hidden Gems
+                    <span class="collapse-icon">▼</span>
+                </div>
+                <div class="shortcuts">
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Command Palette with Category</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → @" data-mac="Cmd + Shift + P → @">Ctrl + Shift + P → @</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Quick Open with Line Number</span>
+                        <span class="keys" data-win="Ctrl + P → filename:42" data-mac="Cmd + P → filename:42">Ctrl + P → filename:42</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Breadcrumb Navigation</span>
+                        <span class="keys" data-win="Ctrl + Shift + ." data-mac="Cmd + Shift + .">Ctrl + Shift + .</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Word Wrap</span>
+                        <span class="keys" data-win="Alt + Z" data-mac="Alt + Z">Alt + Z</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Minimap</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → minimap" data-mac="Cmd + Shift + P → minimap">Ctrl + Shift + P → minimap</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Change Language Mode</span>
+                        <span class="keys" data-win="Ctrl + K M" data-mac="Cmd + K M">Ctrl + K M</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Change Theme</span>
+                        <span class="keys" data-win="Ctrl + K Ctrl + T" data-mac="Cmd + K Cmd + T">Ctrl + K Ctrl + T</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Toggle Activity Bar</span>
+                        <span class="keys" data-win="Ctrl + Shift + P → activity bar" data-mac="Cmd + Shift + P → activity bar">Ctrl + Shift + P → activity bar</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Reload Window</span>
+                        <span class="keys" data-win="Ctrl + R" data-mac="Cmd + R">Ctrl + R</span>
+                    </div>
+                    <div class="shortcut">
+                        <span class="shortcut-desc">Developer Tools</span>
+                        <span class="keys" data-win="Ctrl + Shift + I" data-mac="Cmd + Alt + I">Ctrl + Shift + I</span>
+                    </div>
+                    <div class="pro-tip">
+                        <div class="pro-tip-title">💎 Ultimate Pro Tips:</div>
+                        • Use Ctrl+P → ">" for commands, "@" for symbols, ":" for lines, "#" for workspace symbols<br>
+                        • Create custom keybindings in Ctrl+K Ctrl+S<br>
+                        • Use workspaces to save project-specific settings<br>
+                        • Install Vim extension for modal editing<br>
+                        • Use Live Share for real-time collaboration<br>
+                        • Set up code snippets for frequently used code<br>
+                        • Use tasks.json for custom build commands<br>
+                        • Configure launch.json for debugging setups
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="section">
-        <div class="section-title">File Management</div>
-        <div class="shortcut"><span>New File</span><span class="keys">Ctrl + N</span></div>
-        <div class="shortcut"><span>Save File</span><span class="keys">Ctrl + S</span></div>
-        <div class="shortcut"><span>Close File</span><span class="keys">Ctrl + W</span></div>
-    </div>
+    <script>
+        // Platform switching functionality
+        let currentPlatform = 'win';
 
-    <div class="section">
-        <div class="section-title">Editing & Navigation</div>
-        <div class="shortcut"><span>Go to Line</span><span class="keys">Ctrl + G</span></div>
-        <div class="shortcut"><span>Go to Definition</span><span class="keys">F12</span></div>
-        <div class="shortcut"><span>Comment Line</span><span class="keys">Ctrl + /</span></div>
-        <div class="shortcut"><span>Format Document</span><span class="keys">Shift + Alt + F</span></div>
-    </div>
+        function switchPlatform(platform) {
+            currentPlatform = platform;
 
-    <div class="section">
-        <div class="section-title">Multi-Cursor & Selection</div>
-        <div class="shortcut"><span>Add Cursor</span><span class="keys">Ctrl + Alt + ↑ / ↓</span></div>
-        <div class="shortcut"><span>Select Occurrences</span><span class="keys">Ctrl + D</span></div>
-    </div>
+            // Update button states
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.platform === platform) {
+                    btn.classList.add('active');
+                }
+            });
 
-    <div class="section">
-        <div class="section-title">Search & Replace</div>
-        <div class="shortcut"><span>Find</span><span class="keys">Ctrl + F</span></div>
-        <div class="shortcut"><span>Replace</span><span class="keys">Ctrl + H</span></div>
-    </div>
+            // Update all keyboard shortcuts
+            document.querySelectorAll('.keys').forEach(key => {
+                const winShortcut = key.dataset.win;
+                const macShortcut = key.dataset.mac;
 
-    <div class="section">
-        <div class="section-title">Debugging & Git</div>
-        <div class="shortcut"><span>Start Debugging</span><span class="keys">F5</span></div>
-        <div class="shortcut"><span>Toggle Breakpoint</span><span class="keys">F9</span></div>
-        <div class="shortcut"><span>Source Control</span><span class="keys">Ctrl + Shift + G</span></div>
-    </div>
+                if (platform === 'mac' && macShortcut) {
+                    key.textContent = macShortcut;
+                } else if (winShortcut) {
+                    key.textContent = winShortcut;
+                }
+            });
+        }
 
-    <div class="section">
-        <div class="section-title">Extensions</div>
-        <div class="shortcut"><span>Extensions Panel</span><span class="keys">Ctrl + Shift + X</span></div>
-    </div>
+        // Platform button event listeners
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchPlatform(btn.dataset.platform);
+            });
+        });
+
+        // Section collapse/expand functionality
+        function toggleSection(titleElement) {
+            const section = titleElement.closest('.section');
+            section.classList.toggle('collapsed');
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const shortcuts = section.querySelectorAll('.shortcut');
+                let hasVisibleShortcuts = false;
+
+                shortcuts.forEach(shortcut => {
+                    const description = shortcut.querySelector('.shortcut-desc').textContent.toLowerCase();
+                    const keys = shortcut.querySelector('.keys').textContent.toLowerCase();
+
+                    if (description.includes(searchTerm) || keys.includes(searchTerm)) {
+                        shortcut.style.display = 'flex';
+                        hasVisibleShortcuts = true;
+
+                        // Highlight search terms
+                        if (searchTerm) {
+                            highlightText(shortcut.querySelector('.shortcut-desc'), searchTerm);
+                        } else {
+                            removeHighlight(shortcut.querySelector('.shortcut-desc'));
+                        }
+                    } else {
+                        shortcut.style.display = 'none';
+                    }
+                });
+
+                // Show/hide entire section based on whether it has visible shortcuts
+                if (hasVisibleShortcuts || !searchTerm) {
+                    section.style.display = 'block';
+                    // Expand section if it has matches
+                    if (searchTerm && hasVisibleShortcuts) {
+                        section.classList.remove('collapsed');
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function highlightText(element, searchTerm) {
+            const text = element.textContent;
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            const highlightedText = text.replace(regex, '<span class="highlight">$1</span>');
+            element.innerHTML = highlightedText;
+        }
+
+        function removeHighlight(element) {
+            element.innerHTML = element.textContent;
+        }
+
+        // Search input event listener
+        document.getElementById('searchInput').addEventListener('input', performSearch);
+
+        // Keyboard shortcuts for the cheat sheet itself
+        document.addEventListener('keydown', (e) => {
+            // Focus search with Ctrl+F or Cmd+F
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+
+            // Clear search with Escape
+            if (e.key === 'Escape') {
+                document.getElementById('searchInput').value = '';
+                performSearch();
+                document.getElementById('searchInput').blur();
+            }
+
+            // Toggle platform with Ctrl+Shift+P or Cmd+Shift+P
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
+                e.preventDefault();
+                const newPlatform = currentPlatform === 'win' ? 'mac' : 'win';
+                switchPlatform(newPlatform);
+            }
+        });
+
+        // Initialize with Windows/Linux shortcuts
+        switchPlatform('win');
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add copy functionality for shortcuts
+        document.querySelectorAll('.keys').forEach(key => {
+            key.addEventListener('click', () => {
+                navigator.clipboard.writeText(key.textContent).then(() => {
+                    // Visual feedback
+                    const originalBg = key.style.backgroundColor;
+                    key.style.backgroundColor = '#238636';
+                    setTimeout(() => {
+                        key.style.backgroundColor = originalBg;
+                    }, 200);
+                });
+            });
+
+            // Add tooltip
+            key.title = 'Click to copy shortcut';
+            key.style.cursor = 'pointer';
+        });
+
+        // Add print functionality
+        function printCheatSheet() {
+            window.print();
+        }
+
+        // Add export functionality
+        function exportToText() {
+            let content = 'VS Code Keyboard Shortcuts Cheat Sheet\n';
+            content += '=====================================\n\n';
+
+            document.querySelectorAll('.section').forEach(section => {
+                if (section.style.display !== 'none') {
+                    const title = section.querySelector('.section-title').textContent.replace('▼', '').trim();
+                    content += `${title}\n`;
+                    content += '-'.repeat(title.length) + '\n';
+
+                    section.querySelectorAll('.shortcut').forEach(shortcut => {
+                        if (shortcut.style.display !== 'none') {
+                            const desc = shortcut.querySelector('.shortcut-desc').textContent;
+                            const keys = shortcut.querySelector('.keys').textContent;
+                            content += `${desc}: ${keys}\n`;
+                        }
+                    });
+                    content += '\n';
+                }
+            });
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'vscode-shortcuts.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Add keyboard shortcut hints
+        console.log('🚀 VS Code Cheat Sheet Shortcuts:');
+        console.log('• Ctrl/Cmd + F: Focus search');
+        console.log('• Escape: Clear search');
+        console.log('• Ctrl/Cmd + Shift + P: Toggle platform');
+        console.log('• Click any shortcut key to copy it');
+    </script>
 </body>
 </html>
