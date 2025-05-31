@@ -172,18 +172,24 @@
         }
 
         .pro-tip {
-            background-color: #0d419d;
-            border-left: 4px solid #58a6ff;
+            background-color: #1a2c42; /* Richer blue */
+            border-left: 5px solid #79c0ff; /* Brighter blue for emphasis */
             border-radius: 0 4px 4px 0;
             color: #e6edf3;
             margin: 10px 0;
             padding: 12px 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle lift effect */
         }
 
         .pro-tip-title {
-            color: #58a6ff;
+            color: #58a6ff; /* Keeping original color for consistency */
             font-weight: 600;
             margin-bottom: 5px;
+        }
+
+        .pro-tip-title::before {
+            content: "💡 "; /* Emoji icon */
+            margin-right: 5px; /* Space between icon and text */
         }
 
         .hidden {
@@ -194,6 +200,58 @@
             background-color: #ffd33d22;
             border-radius: 3px;
             padding: 2px 4px;
+        }
+
+        .category-icon {
+            margin-right: 8px; /* Adjust spacing as needed */
+            display: inline-block; /* Ensures proper alignment and spacing */
+        }
+
+        #shortcutOfTheDay {
+            background-color: #21262d; /* Slightly different from other sections or a gradient */
+            border: 1px solid #58a6ff;
+            text-align: center;
+        }
+        #sotdContent {
+            padding: 15px;
+            border-bottom: none; /* Remove border if not needed */
+            display: flex; /* Ensure it behaves like other shortcuts if desired */
+            flex-direction: column; /* Stack description and keys */
+            align-items: center;
+            gap: 8px;
+        }
+        #sotdDesc {
+            font-size: 1.1em;
+            color: #c9d1d9;
+        }
+        #sotdKeys {
+            font-size: 1.2em; /* Make keys slightly larger */
+            padding: 6px 12px;
+            background-color: #0d1117; /* Darker background for keys */
+        }
+        #newSotdButton {
+           background-color: #238636; /* Green like active platform button */
+           display: block;
+           margin-left: auto;
+           margin-right: auto;
+        }
+        #newSotdButton:hover {
+           background-color: #2ea043;
+        }
+
+        .random-highlight {
+            animation: highlightAnimation 2s ease-out;
+        }
+
+        @keyframes highlightAnimation {
+            0% { background-color: #f7900066; } /* Start with highlight color (semi-transparent orange) */
+            75% { background-color: #f7900066; } /* Hold highlight */
+            100% { background-color: transparent; } /* Fade to original background */
+        }
+
+        /* Adjust hover for the new button if needed, though platform-btn style might be sufficient */
+        #learnRandomShortcutButton:hover {
+           background-color: #ffab40 !important; /* Ensure !important if needed to override other .platform-btn hover */
         }
 
         @media (max-width: 768px) {
@@ -229,17 +287,29 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="🔍 Search shortcuts... (e.g., 'format', 'debug', 'git')" />
         </div>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button id="learnRandomShortcutButton" class="platform-btn" style="background-color: #f79000;">✨ Learn a Random Shortcut!</button>
+        </div>
 
         <div class="platform-toggle">
             <button class="platform-btn active" data-platform="win">Windows/Linux</button>
             <button class="platform-btn" data-platform="mac">macOS</button>
         </div>
 
+        <div id="shortcutOfTheDay" class="section">
+            <div class="section-title"><span class="category-icon">🌟</span> Shortcut of the Day 🌟</div>
+            <div id="sotdContent" class="shortcut">
+                <span id="sotdDesc" class="shortcut-desc">Loading amazing shortcut...</span>
+                <span id="sotdKeys" class="keys">Press the button!</span>
+            </div>
+            <button id="newSotdButton" class="platform-btn" style="margin-top: 15px;">Get Another Random Shortcut</button>
+        </div>
+
         <div class="grid">
             <!-- Essential & General -->
             <div class="section" data-category="general">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🎯 Essential & General
+                    <span class="category-icon">🎯</span> Essential & General
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -281,7 +351,7 @@
             <!-- File & Workspace Management -->
             <div class="section" data-category="files">
                 <div class="section-title" onclick="toggleSection(this)">
-                    📁 File & Workspace Management
+                    <span class="category-icon">📁</span> File & Workspace Management
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -347,7 +417,7 @@
             <!-- Navigation & Movement -->
             <div class="section" data-category="navigation">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🧭 Navigation & Movement
+                    <span class="category-icon">🧭</span> Navigation & Movement
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -429,7 +499,7 @@
             <!-- Text Editing & Manipulation -->
             <div class="section" data-category="editing">
                 <div class="section-title" onclick="toggleSection(this)">
-                    ✏️ Text Editing & Manipulation
+                    <span class="category-icon">✏️</span> Text Editing & Manipulation
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -515,7 +585,7 @@
             <!-- Multi-Cursor & Selection -->
             <div class="section" data-category="selection">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🎯 Multi-Cursor & Selection
+                    <span class="category-icon">🎯</span> Multi-Cursor & Selection
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -573,7 +643,7 @@
             <!-- Search & Replace -->
             <div class="section" data-category="search">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🔍 Search & Replace
+                    <span class="category-icon">🔍</span> Search & Replace
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -623,7 +693,7 @@
             <!-- Window & Panel Management -->
             <div class="section" data-category="windows">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🪟 Window & Panel Management
+                    <span class="category-icon">🪟</span> Window & Panel Management
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -697,7 +767,7 @@
             <!-- Terminal Management -->
             <div class="section" data-category="terminal">
                 <div class="section-title" onclick="toggleSection(this)">
-                    💻 Terminal Management
+                    <span class="category-icon">💻</span> Terminal Management
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -751,7 +821,7 @@
             <!-- Debugging -->
             <div class="section" data-category="debug">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🐛 Debugging
+                    <span class="category-icon">🐛</span> Debugging
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -805,7 +875,7 @@
             <!-- Git Integration -->
             <div class="section" data-category="git">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🌿 Git Integration
+                    <span class="category-icon">🌿</span> Git Integration
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -859,7 +929,7 @@
             <!-- IntelliSense & Code Actions -->
             <div class="section" data-category="intellisense">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🧠 IntelliSense & Code Actions
+                    <span class="category-icon">🧠</span> IntelliSense & Code Actions
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -913,7 +983,7 @@
             <!-- Refactoring -->
             <div class="section" data-category="refactor">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🔧 Refactoring
+                    <span class="category-icon">🔧</span> Refactoring
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -955,7 +1025,7 @@
             <!-- Emmet -->
             <div class="section" data-category="emmet">
                 <div class="section-title" onclick="toggleSection(this)">
-                    ⚡ Emmet (HTML/CSS)
+                    <span class="category-icon">⚡</span> Emmet (HTML/CSS)
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -993,7 +1063,7 @@
             <!-- Markdown -->
             <div class="section" data-category="markdown">
                 <div class="section-title" onclick="toggleSection(this)">
-                    📝 Markdown
+                    <span class="category-icon">📝</span> Markdown
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -1031,7 +1101,7 @@
             <!-- Language-Specific -->
             <div class="section" data-category="language">
                 <div class="section-title" onclick="toggleSection(this)">
-                    🌐 Language-Specific
+                    <span class="category-icon">🌐</span> Language-Specific
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -1069,7 +1139,7 @@
             <!-- Pro Tips & Hidden Gems -->
             <div class="section" data-category="protips">
                 <div class="section-title" onclick="toggleSection(this)">
-                    💎 Pro Tips & Hidden Gems
+                    <span class="category-icon">💎</span> Pro Tips & Hidden Gems
                     <span class="collapse-icon">▼</span>
                 </div>
                 <div class="shortcuts">
@@ -1321,6 +1391,108 @@
         console.log('• Escape: Clear search');
         console.log('• Ctrl/Cmd + Shift + P: Toggle platform');
         console.log('• Click any shortcut key to copy it');
+
+        function displayShortcutOfTheDay() {
+            const allShortcuts = [];
+            // Gather all shortcuts from all sections
+            document.querySelectorAll('.section .shortcut').forEach(sc => {
+                // Exclude the SOTD content itself if it's structured the same way
+                if (sc.parentElement.id !== 'sotdContent' && sc.closest('#shortcutOfTheDay') === null) {
+                    const desc = sc.querySelector('.shortcut-desc');
+                    const keys = sc.querySelector('.keys');
+                    if (desc && keys) {
+                        allShortcuts.push({
+                            desc: desc.textContent,
+                            win: keys.dataset.win,
+                            mac: keys.dataset.mac
+                        });
+                    }
+                }
+            });
+
+            if (allShortcuts.length > 0) {
+                const randomIndex = Math.floor(Math.random() * allShortcuts.length);
+                const randomShortcut = allShortcuts[randomIndex];
+
+                document.getElementById('sotdDesc').textContent = randomShortcut.desc;
+                const sotdKeysElement = document.getElementById('sotdKeys');
+                sotdKeysElement.textContent = currentPlatform === 'mac' && randomShortcut.mac ? randomShortcut.mac : randomShortcut.win;
+                // Update data attributes for platform switching consistency
+                sotdKeysElement.dataset.win = randomShortcut.win;
+                sotdKeysElement.dataset.mac = randomShortcut.mac;
+            } else {
+                document.getElementById('sotdDesc').textContent = "Could not find any shortcuts to display!";
+                document.getElementById('sotdKeys').textContent = "";
+            }
+        }
+
+        // Event listener for the new button
+        document.getElementById('newSotdButton').addEventListener('click', displayShortcutOfTheDay);
+
+        // Call it on page load
+        // Ensure this is called after the DOM is fully loaded and shortcuts are present
+        if (document.readyState === 'loading') {
+           document.addEventListener('DOMContentLoaded', displayShortcutOfTheDay);
+        } else {
+           displayShortcutOfTheDay();
+        }
+
+        // Integrate SOTD with platform switching
+        // Modify the existing switchPlatform function to also update SOTD
+        const originalSwitchPlatform = switchPlatform; // Save original
+        window.switchPlatform = function(platform) { // Ensure it's globally available if switchPlatform was global
+            originalSwitchPlatform(platform); // Call original logic
+
+            const sotdKeysElement = document.getElementById('sotdKeys');
+            if (sotdKeysElement && sotdKeysElement.dataset.win) { // Check if SOTD has been populated
+                sotdKeysElement.textContent = platform === 'mac' && sotdKeysElement.dataset.mac ? sotdKeysElement.dataset.mac : sotdKeysElement.dataset.win;
+            }
+        }
+
+        function learnRandomShortcut() {
+            const allShortcutsElements = [];
+            document.querySelectorAll('.section .shortcut').forEach(sc => {
+                // Ensure not to pick from SOTD or any other non-standard shortcut structure
+                if (sc.closest('#shortcutOfTheDay') === null && sc.querySelector('.shortcut-desc') && sc.querySelector('.keys')) {
+                    allShortcutsElements.push(sc);
+                }
+            });
+
+            if (allShortcutsElements.length === 0) {
+                alert("No shortcuts available to learn!");
+                return;
+            }
+
+            const randomShortcutElement = allShortcutsElements[Math.floor(Math.random() * allShortcutsElements.length)];
+            const parentSection = randomShortcutElement.closest('.section');
+
+            // Expand section if collapsed
+            if (parentSection && parentSection.classList.contains('collapsed')) {
+                parentSection.classList.remove('collapsed');
+            }
+
+            // Scroll to the shortcut
+            randomShortcutElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Highlight the shortcut
+            // Remove existing highlights first to handle rapid clicks
+            document.querySelectorAll('.random-highlight').forEach(el => el.classList.remove('random-highlight'));
+
+            // Need to re-fetch the element to apply class after potential DOM changes from scrolling/layout
+            // Forcing a reflow or using a timeout can also help ensure animation plays correctly.
+            setTimeout(() => {
+               // Ensure the element is still valid (e.g. not removed by another script)
+               if (document.body.contains(randomShortcutElement)) {
+                   randomShortcutElement.classList.add('random-highlight');
+                   // Remove the class after animation completes to allow re-triggering
+                   setTimeout(() => {
+                       randomShortcutElement.classList.remove('random-highlight');
+                   }, 2000); // Match animation duration
+               }
+            }, 100); // Small delay to ensure scroll/DOM updates settle.
+        }
+
+        document.getElementById('learnRandomShortcutButton').addEventListener('click', learnRandomShortcut);
     </script>
 </body>
 </html>
